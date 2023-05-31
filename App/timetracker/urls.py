@@ -6,4 +6,5 @@ urlpatterns = [
     path('timetracker/', views.timetracker, name='timetracker'),
     path('projects/', views.projects, name='projects'),
     path('projects/details/<slug:slug>/', views.details, name='details'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
