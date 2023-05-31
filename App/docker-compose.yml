@@ -1,13 +1,4 @@
 services:
-  db: #Postgres
-    image: postgres:latest
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-    volumes:
-      - ./postgres_data:/var/lib/postgresql/data/
-
   app:
     build: .
     volumes:
@@ -16,14 +7,5 @@ services:
       - 80:8000 #Host:Container
     image: app:django
     container_name: timetracker_app
-    command: python manage.py runserver 0.0.0.0:8000
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-    depends_on:
-      - db
-  
-volumes:
-  postgres_data:
+    command: python manage.py runserver 0.0.0.0:8000 && python manage.py makemigrations && python manage.py migrate
 
