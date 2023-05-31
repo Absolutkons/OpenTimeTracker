@@ -1,0 +1,15 @@
+{% extends "master.html" %}
+
+{% block title %}
+    Project details for {{ myproject.name }}
+{% endblock %}
+
+{% block content %}
+<h1>Project details for {{ myproject.name }}</h1>
+  
+<p>Total time: {{ myproject.total_time }} minutes</p>
+<p>Is recording: {{ myproject.is_recording }}</p>
+
+<p>Back to <a href="/projects">Projects</a></p>
+
+{% endblock %}

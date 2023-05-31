@@ -1,0 +1,15 @@
+{% extends "master.html" %}
+
+{% block title %}
+    All projects
+{% endblock %}
+
+{% block content %}
+<h1>All projects</h1>
+<ul>
+  {% for x in myprojects %}
+    <li><a href="details/{{ x.slug }}">{{ x.name }} {{ x.total_time }} {{ x.is_recording }}</a></li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

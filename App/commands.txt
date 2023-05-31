@@ -1,0 +1,22 @@
+Docker Commands:
+1. Build Django/Python image:
+docker-compose build
+
+2. Start stack
+docker-compose up -d
+
+3. Stop stack
+docker-compose down
+
+
+Django Commands:
+1. Start Project:
+
+2. Start new App:
+
+3. Migrate after changes:
+python manage.py migrate
+python manage.py makemigrations appName
+
+4. Collect static files (only for debug=false and whitenoise installed)
+python manage.py collectstatic

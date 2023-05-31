@@ -1,0 +1,4 @@
+Django==4.2.1
+Psycopg2==2.9.6
+whitenoise==6.4.0
+django-bootstrap-v5==1.0.11
