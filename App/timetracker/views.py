@@ -7,6 +7,7 @@ def timetracker(request):
     template = loader.get_template('timetracker.html')
     return HttpResponse(template.render())
 
+#@login_required
 def projects(request):
     myprojects = Project.objects.all().values()
     template = loader.get_template('all_projects.html')
@@ -15,6 +16,7 @@ def projects(request):
     }
     return HttpResponse(template.render(context, request))
 
+#@login_required
 def details(request, slug):
     myproject = Project.objects.get(slug=slug)
     template = loader.get_template('details.html')
