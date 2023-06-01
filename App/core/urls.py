@@ -15,6 +15,8 @@ urlpatterns = [
 
     path('', include('users.urls')),
 
+    path('', include('timetracker.urls')),
+
     path('login/', CustomLoginView.as_view(redirect_authenticated_user=True, template_name='users/login.html',
                                            authentication_form=LoginForm), name='login'),
 

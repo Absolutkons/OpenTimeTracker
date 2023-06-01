@@ -10,6 +10,19 @@
 <p>Total time: {{ myproject.total_time }} minutes</p>
 <p>Is recording: {{ myproject.is_recording }}</p>
 
+{% if myproject.is_recording %}
+    <p><a href="/projects/stop_timer/{{ myproject.id }}/">Stop Timer</a></p>
+{% else %}
+    <p><a href="/projects/start_timer/{{ myproject.id }}/">Start Timer</a></p>
+{% endif %}
+
+<h2>Time entries</h2>
+<ul>
+{% for x in time_entries %}
+    <li>{{ x.start_time }} - {{ x.end_time }} ({{ x.duration }} seconds)</li>
+{% endfor %}
+</ul>
+
 <p>Back to <a href="/projects">Projects</a></p>
 
 {% endblock %}

@@ -5,10 +5,22 @@
 {% endblock %}
 
 {% block content %}
+<h1>Add a new project:</h1>
+<form action="/projects/" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit">
+</form>
+{% if formWasSuccess == 1 %}
+  <p>Project added successfully!</p>
+{% elif formWasSuccess == -1 %}
+  <p>Project with the same name already exists!</p>
+{% endif %}
+
 <h1>All projects</h1>
 <ul>
   {% for x in myprojects %}
-    <li><a href="details/{{ x.slug }}">{{ x.name }} {{ x.total_time }} {{ x.is_recording }}</a></li>
+    <li><a href="details/{{ x.slug }}">{{ x.name }} {{ x.total_time }} {{ x.is_recording }}</a><a href="delete/{{ x.id }}"> Delete </a></li>
   {% endfor %}
 </ul>
 
