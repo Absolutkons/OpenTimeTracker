@@ -2,7 +2,7 @@ Django==4.2.1
 Psycopg2==2.9.6
 whitenoise==6.4.0
 django-bootstrap-v5==1.0.11
-asgiref==3.5.2
+asgiref==3.7.2
 certifi==2022.9.24
 cffi==1.15.1
 charset-normalizer==2.1.1
