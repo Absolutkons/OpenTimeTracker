@@ -13,3 +13,7 @@ class AddProjectForm(forms.Form):
                             widget=forms.TextInput(attrs={'placeholder': 'My Project',
                             }))
     
+    rate = forms.IntegerField(required=False,
+                            label='Rate: ',
+                            widget=forms.NumberInput(attrs={'placeholder': '0',
+                            }))

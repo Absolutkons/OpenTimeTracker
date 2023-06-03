@@ -10,7 +10,7 @@ from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 
 
 def home(request):
-    return render(request, 'users/home.html')
+    return render(request, 'users/home.html', {'avatar' : request.user.profile.avatar.url,})
 
 
 class RegisterView(View):
@@ -40,8 +40,13 @@ class RegisterView(View):
             messages.success(request, f'Account created for {username}')
 
             return redirect(to='login')
+        
+        context = {
+            'form': form,
+            'avatar' : request.user.profile.avatar.url,
+        }
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, context)
 
 
 # Class based view that extends from the built in login view to add a remember me functionality
@@ -94,4 +99,11 @@ def profile(request):
         user_form = UpdateUserForm(instance=request.user)
         profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    return render(request, 'users/profile.html', {'user_form': user_form, 'profile_form': profile_form})
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'avatar': request.user.profile.avatar.url,
+    }
+
+
+    return render(request, 'users/profile.html', context)

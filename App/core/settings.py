@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'social_django',
     'timetracker',
     'bootstrap5',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [

@@ -5,23 +5,72 @@
 {% endblock %}
 
 {% block content %}
-<h1>Add a new project:</h1>
-<form action="/projects/" method="post">
-  {% csrf_token %}
-  {{ form }}
-  <input type="submit" value="Submit">
-</form>
-{% if formWasSuccess == 1 %}
-  <p>Project added successfully!</p>
-{% elif formWasSuccess == -1 %}
-  <p>Project with the same name already exists!</p>
-{% endif %}
+<div class="row text-center">
+  <div class="col">
+    <h1>Add a new project:</h1>
+  </div>  
+  <div class="col">
+    <form action="/projects/" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Submit">
+    </form>
+    {% if formWasSuccess == 1 %}
+      <p>Project added successfully!</p>
+    {% elif formWasSuccess == -1 %}
+      <p>Project with the same name already exists!</p>
+    {% endif %}
+  </div>
+</div>
 
+<div class="row text-center">
 <h1>All projects</h1>
-<ul>
-  {% for x in myprojects %}
-    <li><a href="details/{{ x.slug }}">{{ x.name }} {{ x.total_time }} {{ x.is_recording }}</a><a href="delete/{{ x.id }}"> Delete </a></li>
-  {% endfor %}
-</ul>
+</div>
+
+<!-- Table Headers -->
+<div class="row text-center">
+  <div class="col-auto">
+    <h3>Recording</h3>
+  </div>
+  <div class="col">
+    <h3>Project Name</h3>
+  </div>
+  <div class="col">
+    <h3>Total Project Time</h3>
+  </div>
+  <div class="col-auto">
+    <h3>Start/Stop</h3>
+  </div>
+</div>
+
+{% for x in myprojects %}
+<div class="row text-center">
+  <div class="col-auto">
+    {% if x.is_recording %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-fill" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M8 13A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"/>
+    </svg>
+    {% else %}
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record" viewBox="0 0 16 16">
+      <path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0 1A5 5 0 1 0 8 3a5 5 0 0 0 0 10z"/>
+    </svg>
+    {% endif %}
+  </div>
+  <div class="col">
+    <a href="details/{{ x.slug }}">{{ x.name }}</a>
+  </div>
+  <div class="col">
+    {{ x.total_time }}
+  </div>
+  <div class="col-auto">
+    {% if x.is_recording %}
+      <a href="stop_timer/{{ x.id }}">Stop</a>
+    {% else %}
+      <a href="start_timer/{{ x.id }}">Start</a>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+
 
 {% endblock %}

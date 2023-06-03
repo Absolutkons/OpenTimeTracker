@@ -1,4 +1,5 @@
 {% extends "master.html" %}
+{% load mathfilters %}
 
 {% block title %}
     Project details for {{ myproject.name }}
@@ -19,7 +20,7 @@
 <h2>Time entries</h2>
 <ul>
 {% for x in time_entries %}
-    <li>{{ x.start_time }} - {{ x.end_time }} ({{ x.duration }} seconds)</li>
+    <li>{{ x.start_time.date }} | {{ x.start_time.time }} - {{ x.end_time.time }} | {{ x.duration|div:3600|floatformat:2 }} hours </li>
 {% endfor %}
 </ul>
 
