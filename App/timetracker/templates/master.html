@@ -1,4 +1,5 @@
 {% load static %}
+{% load mathfilters %}
 <!doctype html>
 <!--
 * Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
@@ -245,16 +246,19 @@
 			  <div class="card-body">
 				<div class="row align-items-center">
 				  <div class="col-auto">
-					<span class="bg-facebook text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-facebook -->
-					  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
+					<span class="bg-primary text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/brand-facebook -->
+						<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hourglass-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+							<path d="M17 2a2 2 0 0 1 1.995 1.85l.005 .15v2a6.996 6.996 0 0 1 -3.393 6a6.994 6.994 0 0 1 3.388 5.728l.005 .272v2a2 2 0 0 1 -1.85 1.995l-.15 .005h-10a2 2 0 0 1 -1.995 -1.85l-.005 -.15v-2a6.996 6.996 0 0 1 3.393 -6a6.994 6.994 0 0 1 -3.388 -5.728l-.005 -.272v-2a2 2 0 0 1 1.85 -1.995l.15 -.005h10z" stroke-width="0" fill="currentColor"></path>
+						 </svg>
 					</span>
 				  </div>
 				  <div class="col">
 					<div class="font-weight-medium">
-					  132 Likes
+					  {{ workload_current_week|div:3600|floatformat:2 }} hours last 7 days
 					</div>
 					<div class="text-muted">
-					  21 today
+					  {{ workload_current_month|div:3600|floatformat:2 }} hours last 30 days
 					</div>
 				  </div>
 				</div>

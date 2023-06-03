@@ -10,7 +10,10 @@ from .forms import RegisterForm, LoginForm, UpdateUserForm, UpdateProfileForm
 
 
 def home(request):
-    return render(request, 'users/home.html', {'avatar' : request.user.profile.avatar.url,})
+    if request.user.is_authenticated:
+        return render(request, 'users/home.html', {'avatar' : request.user.profile.avatar.url,})#
+    else:
+        return render(request, 'users/home.html')
 
 
 class RegisterView(View):
