@@ -7,5 +7,5 @@ services:
       - 80:8000 #Host:Container
     image: app:django
     container_name: timetracker_app
-    command: python manage.py runserver 0.0.0.0:8000 && python manage.py makemigrations && python manage.py migrate
+    command: python manage.py runserver 0.0.0.0:8000
 
