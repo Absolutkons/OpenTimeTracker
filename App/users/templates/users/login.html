@@ -2,7 +2,7 @@
 {% block title %} Login Page {% endblock title%}
 {% block content %}
     <div class="form-content my-3 p-3">
-        <div class="container">
+        <div class="container text-center">
             <div class="row justify-content-center">
                 <div class="col-lg-5">
                     <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
@@ -24,30 +24,30 @@
                         <div class="card-body">
                             <form method="POST">
                                 {% csrf_token %}
-                                <div class="form-row">
+                                <div class="form-row" style="margin-bottom:10px">
                                     <div class="col-md-10 offset-md-1">
                                         <div class="form-group">
                                             <a href="{% url 'social:begin' 'github' %}"
                                                    class="btn btn-link btn-lg active btn-block">Sign in with GitHub</a>
-                                            <a href="{% url 'social:begin' 'google-oauth2' %}"
-                                                   class="btn btn-link btn-lg active btn-block">Sign in with Google</a>
+                                            <!--<a href="{% url 'social:begin' 'google-oauth2' %}"
+                                                   class="btn btn-link btn-lg active btn-block">Sign in with Google</a>-->
                                             <hr>
                                             <p class="text-center"><strong>OR</strong></p>
                                             <hr>
-                                            <label class="small mb-1">Username</label>
+                                            <label class="small mb-1" style="display: none;">Username</label>
                                             {{ form.username }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row" style="margin-bottom:20px">
                                     <div class="col-md-10 offset-md-1">
                                         <div class="form-group">
-                                          <label class="small mb-1">Password</label>
+                                          <label class="small mb-1" style="display: none;">Password</label>
                                           {{ form.password }}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-row">
+                                <div class="form-row" style="margin-bottom:10px">
                                     <div class="col-md-10 offset-md-1">
                                         <div class="form-group">
                                             <!-- Add a Remember me functionality -->
