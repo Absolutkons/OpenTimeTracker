@@ -101,7 +101,3 @@ def stop_timer(request, id):
         Project.objects.filter(id=id, owner=request.user).update(is_recording=False, total_time = mytimeentry.duration + project_time)
     
     return HttpResponseRedirect('/projects/')
-
-def main(request):
-    template = loader.get_template('main.html')
-    return HttpResponse(template.render())
