@@ -63,6 +63,7 @@ def details(request, slug):
     myproject = Project.objects.get(slug=slug)
     template = loader.get_template('details.html')
     context = {
+        'myproject': myproject,
         'time_entries': TimeEntry.objects.filter(project_id=myproject.id).values(),
     }
     context = {**context, **top_info_bar_context(request)}

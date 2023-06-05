@@ -24,6 +24,14 @@
 {% endfor %}
 </ul>
 
+<h2 class="text-muted">Delete Project</h2>
+<h3 class="text-muted">Very dangerous place to be...</h3>
+
+<form action="/projects/delete/{{ myproject.id }}/" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete Project" class="btn btn-danger">
+</form>
+
 <p>Back to <a href="/projects">Projects</a></p>
 
 {% endblock %}
