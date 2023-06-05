@@ -7,4 +7,5 @@ urlpatterns = [
     path('projects/details/<slug:slug>/', views.details, name='details'),
     path('projects/start_timer/<int:id>/', views.start_timer, name='start_timer'),
     path('projects/stop_timer/<int:id>/', views.stop_timer, name='stop_timer'),
+    path('projects/delete_time_entry/<int:id>/', views.delete_time_entry, name='delete_time_entry'),
 ]

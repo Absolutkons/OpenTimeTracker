@@ -1,19 +1,20 @@
 {% extends "master.html" %}
+{% load mathfilters %}
 
 {% block title %}
     All projects
 {% endblock %}
 
 {% block content %}
-<div class="row text-center">
-  <div class="col">
-    <h1>Add a new project:</h1>
+<div class="row text-center c-add-project-container">
+  <div class="">
+    <h1>New Project:</h1>
   </div>  
-  <div class="col">
-    <form action="/projects/" method="post">
+  <div class="">
+    <form action="/projects/" method="post" class="c-add-project-form">
       {% csrf_token %}
       {{ form }}
-      <input type="submit" value="Submit">
+      <input type="submit" value="Create" class="btn btn-outline-primary btn-lg btn-block">
     </form>
     {% if formWasSuccess == 1 %}
       <p>Project added successfully!</p>
@@ -60,7 +61,7 @@
     <a href="details/{{ x.slug }}">{{ x.name }}</a>
   </div>
   <div class="col">
-    {{ x.total_time }}
+    {{ x.total_time|div:3600|floatformat:2 }} hours
   </div>
   <div class="col-auto">
     {% if x.is_recording %}

@@ -61,11 +61,15 @@ def revenue_all_projects_last_week(myprojects):
 def workload_current_week(myprojects):
     workload = 0
     for project in myprojects:
-        workload += TimeEntry.objects.filter(project=project['id'], start_time__gte=datetime.now()-timedelta(days=7)).aggregate(duration=Sum('duration'))['duration']
+        work = TimeEntry.objects.filter(project=project['id'], start_time__gte=datetime.now()-timedelta(days=7)).aggregate(duration=Sum('duration'))['duration']
+        if work is not None:
+            workload += work
     return workload
 
 def workload_current_month(myprojects):
     workload = 0
     for project in myprojects:
-        workload += TimeEntry.objects.filter(project=project['id'], start_time__gte=datetime.now()-timedelta(days=30)).aggregate(duration=Sum('duration'))['duration']
+        work = TimeEntry.objects.filter(project=project['id'], start_time__gte=datetime.now()-timedelta(days=30)).aggregate(duration=Sum('duration'))['duration']
+        if work is not None:
+            workload += work
     return workload

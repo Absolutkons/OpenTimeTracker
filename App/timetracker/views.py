@@ -75,6 +75,11 @@ def delete(request, id):
     return HttpResponseRedirect('/projects/')
 
 @login_required
+def delete_time_entry(request, id):
+    TimeEntry.objects.filter(id=id).delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+@login_required
 def start_timer(request, id):
     # Check if Project is already running -> do nothing
     if not Project.objects.filter(id=id, owner=request.user, is_recording=True).exists():
@@ -82,7 +87,7 @@ def start_timer(request, id):
         TimeEntry.objects.create(project_id=id, start_time=datetime.now(), rate=Project.objects.get(id=id).default_rate)
         # Set Project.is_recording to True
         Project.objects.filter(id=id, owner=request.user).update(is_recording=True)
-    return HttpResponseRedirect('/projects/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 @login_required
 def stop_timer(request, id):
@@ -100,4 +105,4 @@ def stop_timer(request, id):
         project_time = Project.objects.get(id=id, owner=request.user).total_time
         Project.objects.filter(id=id, owner=request.user).update(is_recording=False, total_time = mytimeentry.duration + project_time)
     
-    return HttpResponseRedirect('/projects/')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

@@ -1,4 +1,47 @@
-body {
-    font-family: verdana;
+.c-add-project-container{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+  .c-add-project-form{
+    text-align: center;
   }
-  
+
+    .c-add-project-form label{
+      width: 30%;      
+      padding: 0;
+      margin: 0;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .c-add-project-form input{
+      width: 60%;
+      padding: 0;
+      margin: auto;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .c-add-project-form input::placeholder{
+      text-align: center;
+    }
+
+a{
+  text-decoration: none;
+}
+
+  a:hover{
+    text-decoration: none;
+    color: white
+  }
+
+
+.custom-time-entries ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
