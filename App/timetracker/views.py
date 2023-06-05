@@ -4,17 +4,36 @@ from django.template import loader
 from django.contrib.auth.decorators import login_required
 
 import sys
-sys.path.insert(0, 'timetracker/algorithms')
-import top_stats
+from .top_stats import *
 
 # Import time
 from datetime import datetime, timedelta
 from .models import Project, TimeEntry
 from .forms import AddProjectForm
 
+# Top Info Bar Context
+def top_info_bar_context(request):
+    try:
+        myprojects = Project.objects.filter(owner=request.user).values()
+    except:
+        myprojects = None
+    return {
+        'myprojects': myprojects,
+        'runningprojects': Project.objects.filter(owner=request.user, is_recording=True).values(),
+        'projects_added_last_week' : projects_added_last_week(myprojects),
+        'time_projects_all' : total_time_all_projects_hours(request, myprojects),
+        'time_projects_week' : total_time_last_week_all_projects_hours(myprojects),
+        'revenue_projects_all' : revenue_all_projects(myprojects),
+        'revenue_projects_week' : revenue_all_projects_last_week(myprojects),
+        'workload_current_week' : workload_current_week(myprojects),
+        'workload_current_month' : workload_current_month(myprojects),
+        'avatar' : request.user.profile.avatar.url,
+        'showTopInfoBar' : True,
+    }
 
 @login_required
 def projects(request):
+    template = loader.get_template('all_projects.html')
     formWasSuccess = 0
     # if this is a POST request we need to process the form data
     if request.method == "POST":
@@ -31,26 +50,12 @@ def projects(request):
 
     form = AddProjectForm()
 
-    try:
-        myprojects = Project.objects.filter(owner=request.user).values()
-    except:
-        myprojects = None
-    template = loader.get_template('all_projects.html')
-
     context = {
-        'myprojects': myprojects,
-        'runningprojects': Project.objects.filter(owner=request.user, is_recording=True).values(),
-        'projects_added_last_week' : projects_added_last_week(),
-        'time_projects_all' : total_time_all_projects_hours(),
-        'time_projects_week' : total_time_last_week_all_projects_hours(),
-        'revenue_projects_all' : revenue_all_projects(),
-        'revenue_projects_week' : revenue_all_projects_last_week(),
-        'workload_current_week' : workload_current_week(),
-        'workload_current_month' : workload_current_month(),
         'form': form,
         'formWasSuccess': formWasSuccess,
-        'avatar' : request.user.profile.avatar.url,
     }
+
+    context = {**context, **top_info_bar_context(request)}
     return HttpResponse(template.render(context, request))
 
 @login_required
@@ -58,11 +63,9 @@ def details(request, slug):
     myproject = Project.objects.get(slug=slug)
     template = loader.get_template('details.html')
     context = {
-        'myproject': myproject,
-        'runningprojects': Project.objects.filter(owner=request.user, is_recording=True).values(),
         'time_entries': TimeEntry.objects.filter(project_id=myproject.id).values(),
-        'avatar' : request.user.profile.avatar.url,
     }
+    context = {**context, **top_info_bar_context(request)}
     return HttpResponse(template.render(context, request))
 
 @login_required

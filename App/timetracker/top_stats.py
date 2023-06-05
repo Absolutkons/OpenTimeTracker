@@ -1,8 +1,6 @@
 from django.db.models import Sum
 from datetime import datetime, timedelta
-import sys
-sys.path.insert(0, 'timetracker/')
-import models
+from .models import Project, TimeEntry
 
 def total_time_last_week_all_projects_hours(myprojects):
     total_time = 0
